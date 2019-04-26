@@ -2,15 +2,15 @@ provider "aws" {
   assume_role {
     role_arn     = "${replace(data.local_file.arn.content,"\n","")}"
   }
-  region     = "eu-west-2"
+  region     = "${replace(data.local_file.region.content,"\n","")}"
 }
 
 data "local_file" "arn" {
-    filename = "arn.txt"
+    filename = "/opt/arn.txt"
 }
 
 data "local_file" "region" {
-    filename = "region"
+    filename = "/opt/region"
 }
 
 data "aws_ami" "ubuntu" {
