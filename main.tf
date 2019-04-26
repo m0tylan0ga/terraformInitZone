@@ -1,15 +1,17 @@
 provider "aws" {
   assume_role {
-    role_arn     = "${replace(data.local_file.foo.content,"\n","")}"
+    role_arn     = "${replace(data.local_file.arn.content,"\n","")}"
   }
   region     = "eu-west-2"
 }
 
-data "local_file" "foo" {
+data "local_file" "arn" {
     filename = "arn.txt"
 }
 
-
+data "local_file" "region" {
+    filename = "region"
+}
 
 data "aws_ami" "ubuntu" {
   most_recent = true
