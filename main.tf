@@ -13,7 +13,6 @@ terraform {
     dynamodb_table = "terraform-lock"
     key = "terraform/dev/terraform_dev.tfstate"
     encrypt = true
-    role_arn = "${replace(data.local_file.arn.content,"\n","")}"
   }
 }
 
