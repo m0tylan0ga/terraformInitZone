@@ -5,6 +5,19 @@ provider "aws" {
   region     = "${replace(data.local_file.region.content,"\n","")}"
 }
 
+terraform {
+  backend "s3" {
+    #bucket name here is hardcoded - we should try to create s3 bucket automatically by cloud formation and then try to find it eg by tag in terraform
+    bucket = "tbase-terra-lock-bucket-initial"
+    region  = "eu-west-2"
+    dynamodb_table = "terraform-lock"
+    key = "terraform/dev/terraform_dev.tfstate"
+    encrypt = true
+    access_key = "AKIAYV7NV5OMTAKSWLW4"
+    secret_key = "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"
+  }
+}
+
 data "local_file" "arn" {
     filename = "/opt/arn.txt"
 }
