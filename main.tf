@@ -12,7 +12,6 @@ terraform {
     region  = "eu-west-2"
     dynamodb_table = "terraform-lock"
     key = "terraform/dev/terraform_dev.tfstate"
-    role_arn = "${replace(data.local_file.arn.content,"\n","")}"
     encrypt = true
   }
 }
